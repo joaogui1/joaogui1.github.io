@@ -22,7 +22,7 @@ baseurl: "/fastpages" # the subpath of your site, e.g. /blog
 github_repo: "fastpages"
 
 # Set this to true to get LaTeX math equation support
-use_math:
+use_math: true
 
 # Add your Google Analytics ID here if you have one and want to use it
 google_analytics:
