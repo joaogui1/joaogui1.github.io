@@ -3,8 +3,8 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
+title: Programmer in Progress
 ---
-# Programmer in Progress
 
 ## [About me](/about/)
 
