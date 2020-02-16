@@ -13,7 +13,7 @@ title: Maths Resources
 
 [Cool application of Elliptical Curves](http://qr.ae/TUIexA)
 
-[Why Pòlinomials matter](http://qr.ae/TUIex9)
+[Why Polinomials matter](http://qr.ae/TUIex9)
 
 [Quick Roadmap to Algebraic Geometry](http://qr.ae/TUIemI)
 
