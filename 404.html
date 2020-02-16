@@ -1,24 +1,70 @@
----
-permalink: /404.html
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
 
-<style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Canvas</title>
+</head>
 
-<div class="container">
-  <h1>404</h1>
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-</div>
+<body>
+    <h4>Page not found :(. At least you can draw here!</h4>
+    <canvas id="draw" width="800" height="800"></canvas>
+    <script>
+        const canvas = document.querySelector('#draw');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        ctx.strokeStyle = '#BADA55';
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        ctx.lineWidth = 80;
+
+
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let hue = 0;
+        let direction = 1;
+
+        function draw(e) {
+            if (!isDrawing) return;
+            ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+            ctx.beginPath();
+            // start from
+            ctx.moveTo(lastX, lastY);
+            // go to
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+
+            hue++;
+            if (hue > 360) hue -= 360;
+
+            if (ctx.lineWidth >= 80 || ctx.lineWidth <= 1)
+                direction = -direction;
+            ctx.lineWidth += direction;
+        }
+
+        canvas.addEventListener('pointerdown', (e) => {
+            isDrawing = true;
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        });
+
+
+        canvas.addEventListener('pointermove', draw);
+        canvas.addEventListener('pointerup', () => isDrawing = false);
+        canvas.addEventListener('pointerout', () => isDrawing = false);
+
+    </script>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+        }
+    </style>
+
+</body>
+
+</html>
