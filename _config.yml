@@ -2,27 +2,27 @@
 #
 # This config file is meant for settings that affect your whole blog.
 #
-# If you need help with YAML syntax, here are some quick references for you: 
+# If you need help with YAML syntax, here are some quick references for you:
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 
-title: fastpages
+title: Programmer in Progress
 description: An easy to use blogging platform with support for Jupyter Notebooks.
-github_username: fastai
+github_username: joaogui1
 
 # Email and twitter are optional:
-email: 
-twitter_username: "@fastdotai"
+email:
+twitter_username: "@iugoaoj"
 
 # OPTIONAL: override baseurl and url if using a custom domain
-url: "https://fastai.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://joaogui1.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "/fastpages" # the subpath of your site, e.g. /blog
 
 # you can comment the below line out if your repo name is not different than your baseurl
 github_repo: "fastpages"
 
 # Set this to true to get LaTeX math equation support
-use_math: 
+use_math:
 
 # Add your Google Analytics ID here if you have one and want to use it
 google_analytics:
