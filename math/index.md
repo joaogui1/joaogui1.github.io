@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Mathematics Resources
+title: Maths Resources
 ---
 
 ### Good wikipedia articles
