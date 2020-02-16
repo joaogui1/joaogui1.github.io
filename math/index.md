@@ -3,8 +3,6 @@ layout: page
 title: Maths Resources
 ---
 
-### Good wikipedia articles
-
 ### Great Math Overflow and Stack Exchange Questions
 
 [What specific algebraic properties are broken at each Cayley-Dickson stage beyond octonions?](https://math.stackexchange.com/questions/641809/what-specific-algebraic-properties-are-broken-at-each-cayley-dickson-stage-beyon)
@@ -96,5 +94,3 @@ title: Maths Resources
 [Roadmap for Algebraic Geometry for Undergrads](https://www.reddit.com/r/math/comments/3s9q8o/a_road_map_for_learning_algebraic_geometry_as_an/)
 
 [Good post about the Schanuel's Conjecture](https://www.reddit.com/r/math/comments/95ypna/effortpost_schanuels_conjecture/)
-
-### Ramblings
