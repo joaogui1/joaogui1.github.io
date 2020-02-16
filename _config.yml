@@ -16,7 +16,7 @@ twitter_username: "@iugoaoj"
 
 # OPTIONAL: override baseurl and url if using a custom domain
 url: "https://joaogui1.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-baseurl: "/joaogui1.github.io" # the subpath of your site, e.g. /blog
+baseurl: "/" # the subpath of your site, e.g. /blog
 
 # you can comment the below line out if your repo name is not different than your baseurl
 github_repo: "fastpages"
