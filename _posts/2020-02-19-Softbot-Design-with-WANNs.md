@@ -62,11 +62,11 @@ I spoke to Claus and he advised me to check the output of my models instead of j
 
 Since I believed I "just" needed to fix a few bugs I decided I could already study some techniques to explore the design of softbots, so Claus suggested I studied Quality Diversity algorithms and try to implement them on the project. I read **Quality and Diversity Optimization: A Unifying Modular Framework** and **Quality Diversity Through Surprise**, learning about extremely interesting techniques, like MAP-Elites and Novelty Search with Local Competition, that aim to increase the diversity of solutions found by evolutionary algorithms, while still maintaining high fitness, in fact getting higher fitness than algorithms focused on quality alone.
 
-After around one week of studying I presented what I learned to the procedural generation group and decided to focus on debugging the code, instead of adding functionality to a buggy codebase. 
+After around one week of studying I presented what I learned to the procedural generation group and went back to focusing on debugging the code, instead of adding functionality to a buggy codebase. 
 ## Lack of results and some despair
 
 
-After looking at the specific output of my networks I found a bug I had introduced when creating the evosoro environment that caused my algorithm to never generate one of the materials and to consider "empty" as a possible material even after the first check, that helped the program generate less sparse softbots and increased the performance, but it was still quite low. Besides that voxelyze took quite a while to run and since each WANN needs to be tested 6 times that meant that experiments would take an entire day running only for me to be met with low performance, since I had to generate some kind of report to my funding agency in the end of the program I decided to stop working on the softbot design for a while and simply do something that wasn't done in the original WANN paper despite being relevant, comparing WANN Search with its parent method, NEAT. 
+After looking at the specific output of my networks I found a bug I had introduced when creating the evosoro environment that caused my algorithm to never generate one of the materials and to consider "empty" as a possible material even after the first check, that helped the program generate less sparse softbots and increased the performance, but it was still quite low. Besides that voxelyze took quite a while to run and since each WANN needs to be tested 6 times that meant that experiments would take an entire day running only for me to be met with low performance, since I had to generate some kind of report to my funding agency in the end of the program I stopped working on the softbot design for a while and simply do something that wasn't done in the original WANN paper despite being relevant, comparing WANN Search with its parent method, NEAT. 
 ## Comparing WANNs and NEAT
 
 To that end I compared NEAT and WANN with the same hyperparameters in the cartpole swing up task. The main takeaways were that NEAT trained faster, requiring considerably less compute to reach good performance, but while WANN's connection could be trained to reach 3x the networks initial performance, NEAT would only gain around 10% extra performance. That wasn't particularly surprising, as NEAT is optimizing the weights during evolution, while WANNs are using a fixed shared weight.
@@ -75,7 +75,7 @@ To that end I compared NEAT and WANN with the same hyperparameters in the cartpo
 ## Bug found!
 
 
-I thought about Claus advice of visualizing the output of my algorithm again, and realized that the output wasn't just the softbots, but also the CPPNs architectures, so I decided to work on visualizing the networks generated. There was a directory called vis on the WANNs repo on github, so I decided to try using that, at first there were a few incompatibilities that I had to fix, but soon enough a very weird error was being reported: the activation functions of many nodes were not in the correct range (from 1 to 10). 
+I thought about Claus advice of visualizing the output of my algorithm again, and realized that the output wasn't just the softbots, but also the CPPNs architectures, so I worked on visualizing the networks generated. There was a directory called vis on the WANNs repo on github, so I used it, at first there were a few incompatibilities that I had to fix, but soon enough a very weird error was being reported: the activation functions of many nodes were not in the correct range (from 1 to 10). 
 That was counter intuitive, I took a look at the code and didn't seem to find any specific mistake on it, so I added a quick debug print that would tell me should any activation outside the correct range be generated. After a few extra experiments I realized there was a bug on Google's code! Specifically they have a function that used the + operator as a way to merge lists, but when the function was called one argument was a list, while the other was a numpy array, and so the behavior of the + operator was rather different, summing the content of the lists instead of concatenating them. I fixed the bug and sent a Pull Request to their github repo, that Adam Gaier accepted.
 ## Evolving Neural Nets post bug
 
@@ -89,7 +89,7 @@ After fixing the bug the performance improved again and now it was finally possi
 ## Different inputs and results
 
 
-Finally I decided to study the use of different inputs to my CPPN, besides the x, y and z coordinates and distance from center. As of now I have tested not passing the center and also tested passing the material that was used in the voxels neighbors. Here are some preliminary results, both using 30 generations with a population of 60 individuals and the WANNs being untrained, just evolved:
+Finally I am now studying the use of different inputs to my CPPN, besides the x, y and z coordinates and distance from center. As of now I have tested not passing the center and also tested passing the material that was used in the voxels neighbors. Here are some preliminary results, both using 30 generations with a population of 60 individuals and the WANNs being untrained, just evolved:
 
 ![Softbots comparison]({{ site.baseurl }}/images/Neat_and_WANN_CPPN.png "Softbots comparison")
 
