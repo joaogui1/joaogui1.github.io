@@ -46,7 +46,7 @@ title: My past 3 months of Research
   After fixing the bug the performance improved again and now it was finally possible to generate Neural Networks with many different kinds of activation functions. Here's an example of a net before the bug:
   ![Bug net](../images/BEPE_prebug_net.png)
   And one after:
-  ![Debug net](../images/BEPE_postbug_net.png)
+  ![Debug net](../images/BEPE_postbug_net.png)(:height="400px")
 
 # Different inputs and results
   Finally I decided to study the use of different inputs to my CPPN, besides the x, y and z coordinates and distance from center. As of now I have tested not passing the center and also tested passing the material that was used in the voxels neighbors. Here are some preliminary results:
