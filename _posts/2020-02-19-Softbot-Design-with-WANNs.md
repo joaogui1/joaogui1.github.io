@@ -88,7 +88,11 @@ After fixing the bug the performance improved again and now it was finally possi
 
 Finally I decided to study the use of different inputs to my CPPN, besides the x, y and z coordinates and distance from center. As of now I have tested not passing the center and also tested passing the material that was used in the voxels neighbors. Here are some preliminary results:
 
+![Softbots comparison]({{ site.baseurl }}/images/Neat_and_WANN_CPPN.png "Softbots comparison")
+
 I still need to run these experiments for more generations as that will probably allow for a bigger performance difference to arise, and run them a few more times to get averages to account for bad and good random seeds affecting the results.
+
+There were some extra challenges related to dealing with weights optimization using CMA-ES and using PEPG, but this post is quite too long as it is, so maybe I will talk about that in the future.
 ## TL;DR: Lessons Learned
    - Always check your model's outputs, metrics are a good way to diagnose simple problems, but looking at the output can give you qualitatively better understanding of any problem you come across
    - Don't assume anyone's code is bug free, specially your own
