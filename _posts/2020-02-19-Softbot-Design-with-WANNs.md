@@ -1,5 +1,8 @@
 # My past 3 months of Research
 
+1. TOC
+{:toc}
+
 ## Introduction
 
 I'm a Brazilian undergraduate student in Computer Science and I spent the past 3 months in the University of Tsukuba doing a research internship under Professor Claus Aranha. Here I will talk about my project during these past months to the best of my memory and in the end write down some lessons learned.
@@ -86,9 +89,13 @@ After fixing the bug the performance improved again and now it was finally possi
 ## Different inputs and results
 
 
-Finally I decided to study the use of different inputs to my CPPN, besides the x, y and z coordinates and distance from center. As of now I have tested not passing the center and also tested passing the material that was used in the voxels neighbors. Here are some preliminary results:
+Finally I decided to study the use of different inputs to my CPPN, besides the x, y and z coordinates and distance from center. As of now I have tested not passing the center and also tested passing the material that was used in the voxels neighbors. Here are some preliminary results, 30 generations with a population of 60 individuals:
 
 ![Softbots comparison]({{ site.baseurl }}/images/Neat_and_WANN_CPPN.png "Softbots comparison")
+
+|-| No Center | Center | Neighbors|
+| NEAT-CPPN | 15.94 | 20.17 | 21.31 |
+| WANN-CPPN | 18.66 | 19.22 | 13.83 |
 
 I still need to run these experiments for more generations as that will probably allow for a bigger performance difference to arise, and run them a few more times to get averages to account for bad and good random seeds affecting the results.
 
