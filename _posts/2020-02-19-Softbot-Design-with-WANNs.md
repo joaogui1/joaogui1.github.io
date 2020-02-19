@@ -51,7 +51,7 @@ Both projects were somewhat extensive, evosoro specially as it was written in a 
 ## Initial experiments
 
 
-Initially the experiments showed little progress, with the softbots generated after 100s generations being barely capable of moving at all, and being extremely below the expected fitness, which was quite worrisome. Here's a quick example of what was being generated:
+Initially the experiments showed little progress, with the softbots generated after 100s generations being barely capable of moving at all, and being extremely below the expected fitness, which was quite worrisome. 
 
 I spoke to Claus and he advised me to check the output of my models instead of just looking at the metrics as that would help me better understand what my model was learning and what exactly was the bug.
 ## Quality Diversity Detour
@@ -63,7 +63,7 @@ After around one week of studying I presented what I learned to the procedural g
 ## Lack of results and some despair
 
 
-After looking at the specific output of my networks I found a bug I had introduced when creating the evosoro environment that caused my algorithm to never generate one of the materials and to consider "empty" as a possible material even after the first check, that helped the program generate less sparse softbots and increased the performance, but it was still quite low. Besides that voxelyze took quite a while to run and since each WANN needs to be tested 6 times that meant that experiments would take an entire day running only for me to be met with low performance, since I had to generate some kind of report to FAPESP in the end of the program I decided to stop working on the softbot design for a while and simply do something that wasn't done in the original WANN paper despite being relevant, comparing WANN Search with its parent method, NEAT. 
+After looking at the specific output of my networks I found a bug I had introduced when creating the evosoro environment that caused my algorithm to never generate one of the materials and to consider "empty" as a possible material even after the first check, that helped the program generate less sparse softbots and increased the performance, but it was still quite low. Besides that voxelyze took quite a while to run and since each WANN needs to be tested 6 times that meant that experiments would take an entire day running only for me to be met with low performance, since I had to generate some kind of report to my funding agency in the end of the program I decided to stop working on the softbot design for a while and simply do something that wasn't done in the original WANN paper despite being relevant, comparing WANN Search with its parent method, NEAT. 
 ## Comparing WANNs and NEAT
 
 To that end I compared NEAT and WANN with the same hyperparameters in the cartpole swing up task. The main takeaways were that NEAT trained faster, requiring considerably less compute to reach good performance, but while WANN's connection could be trained to reach 3x the networks initial performance, NEAT would only gain around 10% extra performance. That wasn't particularly surprising, as NEAT is optimizing the weights during evolution, while WANNs are using a fixed shared weight.
@@ -93,6 +93,7 @@ I still need to run these experiments for more generations as that will probably
    - Always check your model's outputs, metrics are a good way to diagnose simple problems, but looking at the output can give you qualitatively better understanding of any problem you come across
    - Don't assume anyone's code is bug free, specially your own
    - Iterate fast, specially in the beginning as that will help you fix any initial bugs and start doing real experiments sooner. This can mean using a small subset of your data, use smaller or simpler models that still represent your idea or using smaller populations and less generations in a genetic algorithm
+   - There is a sweet spot between pivoting too much and spending too much time in a doomed project, everyone is in some point in that spectrum, try to discover if you abandon things too quickly for newer shinier ideas or if you stay too long with an idea that won't ever work
    - Talk to your adviser. Just do it. If you have a progress to show, great! If you're somehow stuck explain why to them and they will probably manage to help.
    - If your adviser is not helping you it may be a good moment to try to find another one or have a serious conversation with them
    - Write from the beginning, I didn't write what I was doing before and recollecting everything took about an entire day. If you keep a log of your experiments, results and ideas it's easier to spot faulty assumptions, brain farts and similar mistakes, besides helping you remember all the experiments you wanted to run
