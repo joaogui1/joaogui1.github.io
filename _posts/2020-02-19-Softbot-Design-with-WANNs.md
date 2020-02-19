@@ -5,29 +5,32 @@
  
 ## The research idea
   
-  ### Softbot Design
-   Soft robots (softbots) are robots built from highly compliant materials, similar to those found in living organisms[1](https://en.wikipedia.org/wiki/Soft_robotics#cite_note-softroboticreview-1). There are many interesting applications for robots made from biological materials, like delivering drugs to specific parts of the human body and general interaction with the insides of a human. 
+### Softbot Design
+  Soft robots (softbots) are robots built from highly compliant materials, similar to those found in living organisms[1](https://en.wikipedia.org/wiki/Soft_robotics#cite_note-softroboticreview-1). There are many interesting applications for robots made from biological materials, like delivering drugs to specific parts of the human body and general interaction with the insides of a human. 
         The paper Unshackling Evolution models the design of softbots as filling a cube with voxels in 3d, each voxel being of 4 possible types:
             - Muscle 1, an active and soft material that actuates periodically, represented by green voxels
             - Muscle 2, same as muscle 1, but when muscle 1 expands muscle 2 contracts and vice versa, represented by red voxels
             - Bone, a passive and rigid material, represented by dark blue voxels
             - Skin or flesh, a passive and soft material, represented by light blue voxels
         - and then simulating the resulting robot using a physics simulation library called voxelyze. The aim of the task is generating softbots that walk the farthest in a given timescale and the paper compares the design of the softbots using direct encoding versus generative encoding (CPPNs)
-  ### CPPNs
-   Compositional Pattern Producing Networks are one of the coolest ideas I've seen in Machine Learning, combining the flexibility of Neural Networks and the ability of Genetic Algorithms to optimize functions with hostile optimization landscapes to generate pretty much anything.
+
+### CPPNs
+  Compositional Pattern Producing Networks are one of the coolest ideas I've seen in Machine Learning, combining the flexibility of Neural Networks and the ability of Genetic Algorithms to optimize functions with hostile optimization landscapes to generate pretty much anything.
    Now for the more technical details, CPPNs are used to generate patterns in a manner similar to a printer head, where they walk through each point in space and associate an output to it. To exemplify that, if we want to generate an image a CPPN will receive the x and y coordinates of each pixel and as output generate the color of that specific pixel. You can also pass some additional information in the input, for example distance from the origin or from the center, or if you're building 3D structures you could pass distance from the axes. 
         But how do we model the function associating points in space to colors? That's where the Neural Network comes in, as NNs are universal function approximators and so we could in theory capture any pattern we want, given a sufficiently big net.
         Finally we have that CPPNs tend to not have a fixed architecture and use many different activation functions in each of its neurons, so we use a neuroevolution algorithm, like NEAT to evolve a neural network that produces the pattern that we want.
-  ### Weight Agnostic Neural Networks
-   While classically CPPNs are evolved by using NEAT my research was initially concerned with what kind of CPPNs would be evolved by using David Ha's weight agnostic neural networks.
-   The aim of WANNs is evolving a neural network architecture that encodes the solution to the problem, de-emphasizing the weights of the connection between neurons. To that end we generate a population of randomly wired nets and evolve them by randomly adding new nodes, new connections between nodes and changing a node activation function, and testing the network with a few (generally 6) random shared weights, and setting the fitness of the individual as the average fitness from the net using the random weights. 
-    WANNs show surprisingly good performance while using a single shared weight across all solutions compared to a normal fixed architecture with the same constraint of using a single weight, but they only achieve performance comparable to state of the art by training the weights of the final architecture, as you would with a normal NN.  
+  
+### Weight Agnostic Neural Networks
+ While classically CPPNs are evolved by using NEAT my research was initially concerned with what kind of CPPNs would be evolved by using David Ha's weight agnostic neural networks.
+ The aim of WANNs is evolving a neural network architecture that encodes the solution to the problem, de-emphasizing the weights of the connection between neurons. To that end we generate a population of randomly wired nets and evolve them by randomly adding new nodes, new connections between nodes and changing a node activation function, and testing the network with a few (generally 6) random shared weights, and setting the fitness of the individual as the average fitness from the net using the random weights. 
+  WANNs show surprisingly good performance while using a single shared weight across all solutions compared to a normal fixed architecture with the same constraint of using a single weight, but they only achieve performance comparable to state of the art by training the weights of the final architecture, as you would with a normal NN.  
+  
 ## Reading the codes and creating the environment
-  ### Getting the codebases and translating to modern python
-   My first challenge with this research was setting up my environment, as I had to initially combine Davd Ha's Weight Agnostic Neural Networks code with the Unshackling evolution challenge. Thankfully I found Kriegman's github, where he implemented Unshackling Evolution in python, though it was still in python2.7 and so I would need to do some translating to python 3 before merging the codebases.
-   A few dozens of unicode errors later and evosoro was up and running in python 3.6 and so I could start thinking about merging the codebases.
-  ### Merging the codebases
-   Both projects were somewhat extensive, evosoro specially as it was written in a very general way as to make it easier to implement other papers beyond Unshackling Evolution. After a good deal of time reading through the code I decided to use David Ha's code for optimization and create a Gym Task based on Voxelyze.
+### Getting the codebases and translating to modern python
+ My first challenge with this research was setting up my environment, as I had to initially combine Davd Ha's Weight Agnostic Neural Networks code with the Unshackling evolution challenge. Thankfully I found Kriegman's github, where he implemented Unshackling Evolution in python, though it was still in python2.7 and so I would need to do some translating to python 3 before merging the codebases.
+ A few dozens of unicode errors later and evosoro was up and running in python 3.6 and so I could start thinking about merging the codebases.
+### Merging the codebases
+ Both projects were somewhat extensive, evosoro specially as it was written in a very general way as to make it easier to implement other papers beyond Unshackling Evolution. After a good deal of time reading through the code I decided to use David Ha's code for optimization and create a Gym Task based on Voxelyze.
 ## Initial experiments
   Initially the experiments showed little progress, with the softbots generated after 100s generations being barely capable of moving at all, and being extremely below the expected fitness, which was quite worrisome. Here's a quick example of what was being generated:
 
