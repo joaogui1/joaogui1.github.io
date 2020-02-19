@@ -7,12 +7,14 @@
   
 ### Softbot Design
   Soft robots (softbots) are robots built from highly compliant materials, similar to those found in living organisms[1](https://en.wikipedia.org/wiki/Soft_robotics#cite_note-softroboticreview-1). There are many interesting applications for robots made from biological materials, like delivering drugs to specific parts of the human body and general interaction with the insides of a human. 
-        The paper Unshackling Evolution models the design of softbots as filling a cube with voxels in 3d, each voxel being of 4 possible types:
-            - Muscle 1, an active and soft material that actuates periodically, represented by green voxels
-            - Muscle 2, same as muscle 1, but when muscle 1 expands muscle 2 contracts and vice versa, represented by red voxels
-            - Bone, a passive and rigid material, represented by dark blue voxels
-            - Skin or flesh, a passive and soft material, represented by light blue voxels
-        - and then simulating the resulting robot using a physics simulation library called voxelyze. The aim of the task is generating softbots that walk the farthest in a given timescale and the paper compares the design of the softbots using direct encoding versus generative encoding (CPPNs)
+  The paper Unshackling Evolution models the design of softbots as filling a cube with voxels in 3d, each voxel being of 4 possible types:
+        
+   - Muscle 1, an active and soft material that actuates periodically, represented by green voxels
+   - Muscle 2, same as muscle 1, but when muscle 1 expands muscle 2 contracts and vice versa, represented by red voxels
+   - Bone, a passive and rigid material, represented by dark blue voxels
+   - Skin or flesh, a passive and soft material, represented by light blue voxels
+        
+  And then simulating the resulting robot using a physics simulation library called voxelyze. The aim of the task is generating softbots that walk the farthest in a given timescale and the paper compares the design of the softbots using direct encoding versus generative encoding (CPPNs)
 
 ### CPPNs
   Compositional Pattern Producing Networks are one of the coolest ideas I've seen in Machine Learning, combining the flexibility of Neural Networks and the ability of Genetic Algorithms to optimize functions with hostile optimization landscapes to generate pretty much anything.
