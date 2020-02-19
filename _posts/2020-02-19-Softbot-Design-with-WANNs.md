@@ -57,7 +57,7 @@ Initially the experiments showed little progress, with the softbots generated af
 ## Quality Diversity Detour
 
 
-Since I believed I "just" needed to fix a few bugs I decided I could already study some techniques to explore the design of softbots, so Claus suggested I studied Quality Diversity algorithms and try to implement them on the project. I read **Quality and Diversity Optimization: A Unifying Modular Framework.pdf** and **Quality Diversity Through Surprise**, learning about extremely interesting techniques, like MAP-Elites and Novelty Search with Local Competition, that aim to increase the diversity of solutions found by evolutionary algorithms, while still maintaining high fitness, in fact getting higher fitness than algorithms focused on quality alone.
+Since I believed I "just" needed to fix a few bugs I decided I could already study some techniques to explore the design of softbots, so Claus suggested I studied Quality Diversity algorithms and try to implement them on the project. I read **Quality and Diversity Optimization: A Unifying Modular Framework** and **Quality Diversity Through Surprise**, learning about extremely interesting techniques, like MAP-Elites and Novelty Search with Local Competition, that aim to increase the diversity of solutions found by evolutionary algorithms, while still maintaining high fitness, in fact getting higher fitness than algorithms focused on quality alone.
 
 After around one week of studying I presented what I learned to the procedural generation group and decided to focus on debugging the code, instead of adding functionality to a buggy codebase. 
 ## Lack of results and some despair
@@ -65,6 +65,10 @@ After around one week of studying I presented what I learned to the procedural g
 
 I found a bug I had introduced when creating the evosoro environment that caused my algorithm to never generate one of the materials and to consider "empty" as a possible material even after the first check, that helped the program generate less sparse softbots and increased the performance, but it was still quite low. Besides that voxelyze took quite a while to run and since each WANN needs to be tested 6 times that meant that experiments would take an entire day running only for me to be met with low performance, since I had to generate some kind of report to FAPESP in the end of the program I decided to stop working on the softbot design for a while and simply do something that wasn't done in the original WANN paper despite being rather poignant, comparing WANN Search with its parent method, NEAT. 
 ## Comparing WANNs and NEAT
+
+To that end I compared NEAT and WANN with the same hyperparameters in the cartpole swing up task. The main takeaways were that NEAT trained faster, requiring considerably less compute to reach good performance, but while WANN's connection could be trained to reach 3x the networks initial performance, NEAT would only gain around 10% extra performance. That wasn't particularly surprising, as NEAT is optimizing the weights during evolution, while WANNs are using a fixed shared weight.
+![WANN vs NEAT]({{ site.baseurl }}/images/wann_vs_neat.png "WANN vs NEAT")
+
 ## Bug found!
 
 
