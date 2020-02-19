@@ -42,9 +42,10 @@
   I thought about Claus advice of visualizing the output of my algorithm again, and realized that the output wasn't just the softbots, but also the CPPNs architectures, so I decided to work on visualizing the networks generated. There was a directory called vis on the WANNs repo on github, so I decided to try using that, at first there were a few incompatibilities that I had to fix, but soon enough a very weird error was being reported: the activation functions of many nodes were not in the correct range (from 1 to 10). That was counter intuitive, I took a look at the code and didn't seem to find any specific mistake on it, so I added a quick debug print that would tell me should any activation outside the correct range be generated. After a few extra experiments I realized there was a bug on Google's code! Specifically they have a function that used the + operator as a way to merge lists, but when the function was called one argument was a list, while the other was a numpy array, and so the behavior of the + operator was rather different, summing the content of the lists instead of concatenating them. I fixed the bug and sent a Pull Request to their github repo, that Adam Gaier accepted.
 ## Evolving Neural Nets post bug
   After fixing the bug the performance improved again and now it was finally possible to generate Neural Networks with many different kinds of activation functions. Here's an example of a net before the bug:
-  ![Bug net](../images/BEPE_prebug_net.png)
+  ![Bug net]({{ site.baseurl }}/images/BEPE_prebug_net.png "Buggy net")
+  
   And one after:
-  ![Debug net](../images/BEPE_postbug_net.png)(:height="400px")
+  ![Debug net]({{ site.baseurl }}/images/BEPE_postbug_net.png "Debugged net")
 
 ## Different inputs and results
   Finally I decided to study the use of different inputs to my CPPN, besides the x, y and z coordinates and distance from center. As of now I have tested not passing the center and also tested passing the material that was used in the voxels neighbors. Here are some preliminary results:
