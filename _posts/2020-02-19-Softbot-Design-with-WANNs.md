@@ -1,3 +1,7 @@
+---
+layout: page
+title: My past 3 months of Research
+---
 # Introduction
   I'm a Brazilian undergraduate student in Computer Science and I spent the past 3 months in the University of Tsukuba doing a research internship under Professor Claus Aranha. Here I will talk about my project during these past months to the best of my memory and in the end write down some lessons learned.
  
@@ -6,10 +10,10 @@
   ## Softbot Design
    Soft robots (softbots) are robots built from highly compliant materials, similar to those found in living organisms[1](https://en.wikipedia.org/wiki/Soft_robotics#cite_note-softroboticreview-1). There are many interesting applications for robots made from biological materials, like delivering drugs to specific parts of the human body and general interaction with the insides of a human. 
         The paper Unshackling Evolution models the design of softbots as filling a cube with voxels in 3d, each voxel being of 4 possible types:
-            - Muscle 1, an active and soft material that actuates periodically
-            - Muscle 2, same as muscle 1, but when muscle 1 expands muscle 2 contracts and vice versa
-            - Bone, a passive and rigid material
-            - Skin or flesh, a passive and soft material
+            - Muscle 1, an active and soft material that actuates periodically, represented by green voxels
+            - Muscle 2, same as muscle 1, but when muscle 1 expands muscle 2 contracts and vice versa, represented by red voxels
+            - Bone, a passive and rigid material, represented by dark blue voxels
+            - Skin or flesh, a passive and soft material, represented by light blue voxels
         - and then simulating the resulting robot using a physics simulation library called voxelyze. The aim of the task is generating softbots that walk the farthest in a given timescale and the paper compares the design of the softbots using direct encoding versus generative encoding (CPPNs)
   ## CPPNs
    Compositional Pattern Producing Networks are one of the coolest ideas I've seen in Machine Learning, combining the flexibility of Neural Networks and the ability of Genetic Algorithms to optimize functions with hostile optimization landscapes to generate pretty much anything.
@@ -40,8 +44,9 @@
   I thought about Claus advice of visualizing the output of my algorithm again, and realized that the output wasn't just the softbots, but also the CPPNs architectures, so I decided to work on visualizing the networks generated. There was a directory called vis on the WANNs repo on github, so I decided to try using that, at first there were a few incompatibilities that I had to fix, but soon enough a very weird error was being reported: the activation functions of many nodes were not in the correct range (from 1 to 10). That was counter intuitive, I took a look at the code and didn't seem to find any specific mistake on it, so I added a quick debug print that would tell me should any activation outside the correct range be generated. After a few extra experiments I realized there was a bug on Google's code! Specifically they have a function that used the + operator as a way to merge lists, but when the function was called one argument was a list, while the other was a numpy array, and so the behavior of the + operator was rather different, summing the content of the lists instead of concatenating them. I fixed the bug and sent a Pull Request to their github repo, that Adam Gaier accepted.
 # Evolving Neural Nets post bug
   After fixing the bug the performance improved again and now it was finally possible to generate Neural Networks with many different kinds of activation functions. Here's an example of a net before the bug:
-
+  ![Bug net](../images/BEPE_prebug_net.png)
   And one after:
+  ![Debug net](../images/BEPE_postbug_net.png)
 
 # Different inputs and results
   Finally I decided to study the use of different inputs to my CPPN, besides the x, y and z coordinates and distance from center. As of now I have tested not passing the center and also tested passing the material that was used in the voxels neighbors. Here are some preliminary results:
