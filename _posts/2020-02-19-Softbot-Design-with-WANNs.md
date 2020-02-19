@@ -41,7 +41,7 @@ WANNs show surprisingly good performance while using a single shared weight acro
 ### Getting the codebases and translating to modern python
 
 
-My first challenge with this research was setting up my environment, as I had to initially combine Davd Ha's Weight Agnostic Neural Networks code with the Unshackling evolution challenge. Thankfully I found Kriegman's github, where he implemented Unshackling Evolution in python, though it was still in python2.7 and so I would need to do some translating to python 3 before merging the codebases.
+My first challenge with this research was setting up my environment, as I had to initially combine Davd Ha's Weight Agnostic Neural Networks code with the Unshackling evolution challenge. Thankfully I found Kriegman's github, where he implemented Unshackling Evolution in python, calling it evosoro (for **evo**lution of **so**ft **ro**bots), though it was still in python2.7 and so I would need to do some translating to python 3 before merging the codebases.
 
 A few dozens of unicode errors later and evosoro was up and running in python 3.6 and so I could start thinking about merging the codebases.
 ### Merging the codebases
@@ -53,7 +53,7 @@ Both projects were somewhat extensive, evosoro specially as it was written in a 
 
 Initially the experiments showed little progress, with the softbots generated after 100s generations being barely capable of moving at all, and being extremely below the expected fitness, which was quite worrisome. Here's a quick example of what was being generated:
 
-
+I spoke to Claus and he advised me to check the output of my models instead of just looking at the metrics as that would help me better understand what my model was learning and what exactly was the bug.
 ## Quality Diversity Detour
 
 
@@ -63,7 +63,7 @@ After around one week of studying I presented what I learned to the procedural g
 ## Lack of results and some despair
 
 
-I found a bug I had introduced when creating the evosoro environment that caused my algorithm to never generate one of the materials and to consider "empty" as a possible material even after the first check, that helped the program generate less sparse softbots and increased the performance, but it was still quite low. Besides that voxelyze took quite a while to run and since each WANN needs to be tested 6 times that meant that experiments would take an entire day running only for me to be met with low performance, since I had to generate some kind of report to FAPESP in the end of the program I decided to stop working on the softbot design for a while and simply do something that wasn't done in the original WANN paper despite being rather poignant, comparing WANN Search with its parent method, NEAT. 
+After looking at the specific output of my networks I found a bug I had introduced when creating the evosoro environment that caused my algorithm to never generate one of the materials and to consider "empty" as a possible material even after the first check, that helped the program generate less sparse softbots and increased the performance, but it was still quite low. Besides that voxelyze took quite a while to run and since each WANN needs to be tested 6 times that meant that experiments would take an entire day running only for me to be met with low performance, since I had to generate some kind of report to FAPESP in the end of the program I decided to stop working on the softbot design for a while and simply do something that wasn't done in the original WANN paper despite being relevant, comparing WANN Search with its parent method, NEAT. 
 ## Comparing WANNs and NEAT
 
 To that end I compared NEAT and WANN with the same hyperparameters in the cartpole swing up task. The main takeaways were that NEAT trained faster, requiring considerably less compute to reach good performance, but while WANN's connection could be trained to reach 3x the networks initial performance, NEAT would only gain around 10% extra performance. That wasn't particularly surprising, as NEAT is optimizing the weights during evolution, while WANNs are using a fixed shared weight.
@@ -72,7 +72,8 @@ To that end I compared NEAT and WANN with the same hyperparameters in the cartpo
 ## Bug found!
 
 
-I thought about Claus advice of visualizing the output of my algorithm again, and realized that the output wasn't just the softbots, but also the CPPNs architectures, so I decided to work on visualizing the networks generated. There was a directory called vis on the WANNs repo on github, so I decided to try using that, at first there were a few incompatibilities that I had to fix, but soon enough a very weird error was being reported: the activation functions of many nodes were not in the correct range (from 1 to 10). That was counter intuitive, I took a look at the code and didn't seem to find any specific mistake on it, so I added a quick debug print that would tell me should any activation outside the correct range be generated. After a few extra experiments I realized there was a bug on Google's code! Specifically they have a function that used the + operator as a way to merge lists, but when the function was called one argument was a list, while the other was a numpy array, and so the behavior of the + operator was rather different, summing the content of the lists instead of concatenating them. I fixed the bug and sent a Pull Request to their github repo, that Adam Gaier accepted.
+I thought about Claus advice of visualizing the output of my algorithm again, and realized that the output wasn't just the softbots, but also the CPPNs architectures, so I decided to work on visualizing the networks generated. There was a directory called vis on the WANNs repo on github, so I decided to try using that, at first there were a few incompatibilities that I had to fix, but soon enough a very weird error was being reported: the activation functions of many nodes were not in the correct range (from 1 to 10). 
+That was counter intuitive, I took a look at the code and didn't seem to find any specific mistake on it, so I added a quick debug print that would tell me should any activation outside the correct range be generated. After a few extra experiments I realized there was a bug on Google's code! Specifically they have a function that used the + operator as a way to merge lists, but when the function was called one argument was a list, while the other was a numpy array, and so the behavior of the + operator was rather different, summing the content of the lists instead of concatenating them. I fixed the bug and sent a Pull Request to their github repo, that Adam Gaier accepted.
 ## Evolving Neural Nets post bug
 
 
