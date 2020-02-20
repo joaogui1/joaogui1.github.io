@@ -14,15 +14,15 @@ I'm a Brazilian undergraduate student in Computer Science and I spent the past 3
 Soft robots (softbots) are robots built from highly compliant materials, similar to those found in living organisms[1](https://en.wikipedia.org/wiki/Soft_robotics#cite_note-softroboticreview-1). There are many interesting applications for robots made from biological materials, like delivering drugs to specific parts of the human body and general interaction with the insides of a human. 
   
 The paper Unshackling Evolution models the design of softbots as filling a cube with voxels in 3d, each voxel being of 4 possible types:
-        
+
    - Muscle 1, an active and soft material that actuates periodically, represented by green voxels
    - Muscle 2, same as muscle 1, but when muscle 1 expands muscle 2 contracts and vice versa, represented by red voxels
    - Bone, a passive and rigid material, represented by dark blue voxels
    - Skin or flesh, a passive and soft material, represented by light blue voxels
-        
+
 And then simulating the resulting robot using a physics simulation library called voxelyze. The aim of the task is generating softbots that walk the farthest in a given timescale and the paper compares the design of the softbots using direct encoding versus generative encoding (CPPNs)
 
-### CPPNs
+### [CPPNs](https://eplex.cs.ucf.edu/papers/stanley_gpem07.pdf)
 
 Compositional Pattern Producing Networks are one of the coolest ideas I've seen in Machine Learning, combining the flexibility of Neural Networks and the ability of Genetic Algorithms to optimize functions with hostile optimization landscapes to generate pretty much anything.
  
@@ -32,7 +32,7 @@ But how do we model the function associating points in space to colors? That's w
 
 Finally we have that CPPNs tend to not have a fixed architecture and use many different activation functions in each of its neurons, so we use a neuroevolution algorithm, like NEAT to evolve a neural network that produces the pattern that we want.
   
-### Weight Agnostic Neural Networks
+### [Weight Agnostic Neural Networks](https://weightagnostic.github.io/)
 
 While classically CPPNs are evolved by using NEAT my research was initially concerned with what kind of CPPNs would be evolved by using David Ha's weight agnostic neural networks.
 
@@ -60,7 +60,7 @@ I spoke to Claus and he advised me to check the output of my models instead of j
 ## Quality Diversity Detour
 
 
-Since I believed I "just" needed to fix a few bugs I decided I could already study some techniques to explore the design of softbots, so Claus suggested I studied Quality Diversity algorithms and try to implement them on the project. I read **Quality and Diversity Optimization: A Unifying Modular Framework** and **Quality Diversity Through Surprise**, learning about extremely interesting techniques, like MAP-Elites and Novelty Search with Local Competition, that aim to increase the diversity of solutions found by evolutionary algorithms, while still maintaining high fitness, in fact getting higher fitness than algorithms focused on quality alone.
+Since I believed I "just" needed to fix a few bugs I decided I could already study some techniques to explore the design of softbots, so Claus suggested I studied Quality Diversity algorithms and try to implement them on the project. I read [Quality and Diversity Optimization: A Unifying Modular Framework](https://arxiv.org/abs/1708.09251) and [Quality Diversity Through Surprise](https://arxiv.org/abs/1807.02397), learning about extremely interesting techniques, like MAP-Elites and Novelty Search with Local Competition, that aim to increase the diversity of solutions found by evolutionary algorithms, while still maintaining high fitness, in fact getting higher fitness than algorithms focused on quality alone.
 
 After around one week of studying I presented what I learned to the procedural generation group and went back to focusing on debugging the code, instead of adding functionality to a buggy codebase. 
 ## Lack of results and some despair
