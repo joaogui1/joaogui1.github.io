@@ -44,7 +44,7 @@ WANNs show surprisingly good performance while using a single shared weight acro
 ### Getting the codebases and translating to modern python
 
 
-My first challenge with this research was setting up my environment, as I had to initially combine Davd Ha's Weight Agnostic Neural Networks code with the Unshackling evolution challenge. Thankfully I found Kriegman's github, where he implemented Unshackling Evolution in python, calling it evosoro (for **evo**lution of **so**ft **ro**bots), though it was still in python 2.7 and so I would need to do some translating to python 3 before merging the codebases.
+My first challenge with this research was setting up my environment, as I had to initially combine Davd Ha's Weight Agnostic Neural Networks code with the Unshackling evolution challenge. Thankfully I found Kriegman's github, where he implemented Unshackling Evolution in python, calling it [evosoro](https://github.com/skriegman/evosoro/tree/master/evosoro) (for **evo**lution of **so**ft **ro**bots), though it was still in python 2.7 and so I would need to do some translating to python 3 before merging the codebases.
 
 A few dozens of unicode errors later and evosoro was up and running in python 3.6 and so I could start thinking about merging the codebases.
 ### Merging the codebases
