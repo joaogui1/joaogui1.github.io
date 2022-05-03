@@ -1,0 +1,21 @@
+body {
+    font: 24px Georgia;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+  }
+#container {
+    margin: 15px 30% 20px 5%;
+  }
+
+.marginnote {
+    position: absolute;
+    left: 72%;
+    right: 2%;
+    font-size: small;
+    opacity: 0.8;
+}
+
+.marginnote a {
+    font-size: small;
+}
